@@ -29,7 +29,7 @@ Agents pouvant intervenir dans une partie. Nous en auront deux :
 - Agent humain
 - Agent artificiel
 
-## evaluaters
+## evaluators
 
 Code permettant d'évaluer la valeur courante d'un état du jeu ainsi que les probabilités de jouer 
 un certain nombre de mouvements
