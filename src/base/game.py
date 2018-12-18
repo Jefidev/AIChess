@@ -5,7 +5,7 @@ class Game(object):
     def __init__(self, moves_shape):
         self.moves_shape = moves_shape
 
-    def get_valid_movements(self):
+    def restart():
         NotImplemented
 
     def get_current_state(self):
@@ -15,4 +15,7 @@ class Game(object):
         NotImplemented
 
     def is_move_valid(self, move):
+        NotImplemented
+
+    def perform_move(self, move):
         NotImplemented
