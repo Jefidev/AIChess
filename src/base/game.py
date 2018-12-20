@@ -5,7 +5,7 @@ class Game(object):
     def __init__(self, moves_shape):
         self.moves_shape = moves_shape
 
-    def restart():
+    def restart(self):
         NotImplemented
 
     def get_current_state(self):
