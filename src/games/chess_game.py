@@ -17,6 +17,11 @@ class ChessGame(Game):
         self.board = chess.Board()
         self.state_vec = convertBoardState(self.board)
 
+    def set_board(self,board_val):
+        self.board = chess.Board(board_val)
+        self.state_vec = convertBoardState(self.board)
+
+
     def get_current_state(self):
         return self.state_vec
 
