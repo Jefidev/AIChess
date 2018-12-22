@@ -46,3 +46,23 @@ class ChessGame(Game):
     def _convert_vec_to_move(self, start_position, end_position):
         conv_move = convertMove(start_position, end_position)
         return conv_move
+
+    def get_state_input_model(self,mirror=False):
+
+        #castling = [haut-gauche,haut-droite,bas-gauche,bas-droite]
+        castling = get_castling_state(self.state_vec,self.board)
+
+        if(self.player ^ mirror) : 
+            player_int = 1
+            return convertBoardStateToInputModel(self.state_vec ,self.player,castling,self.board.fullmove_number)
+
+        else : 
+            player_int = 0
+            vec_board_mirror = np.flip(np.negative(self.state_vec))
+
+            castling = get_castling_state(self.state_vec,self.board)
+            castling_mirror = np.flip(castling)
+
+            return convertBoardStateToInputModel(vec_board_mirror,player_int,castling_mirror,self.board.fullmove_number)
+    
+

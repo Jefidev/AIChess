@@ -57,3 +57,53 @@ def convertBoardState(board):
 
 def createIndex(x, y):
     return x + y * 8
+
+# 18 matrice de 8*8
+def convertBoardStateToInputModel(vector,player,castling,nb_moves):
+    vec_player_turn = np.full((1,8, 8), player)
+
+    player_down = np.zeros((6,8*8))
+    player_up = np.zeros((6,8*8))
+
+    for i in range(0,len(vector)):
+        if (vector[i]>0):
+            player_down[vector[i]-1][i]=1
+        if (vector[i]<0):
+            player_up[-(vector[i]+1)][i]=1
+            
+    player_down = player_down.reshape((6,8,8))
+    player_up = player_up.reshape((6,8,8))
+
+    result = np.append(vec_player_turn,player_down, axis=0)
+    result = np.append(result,player_up, axis=0)
+
+    vec_castling = np.zeros((4,8,8))
+    for i in range(0,4):
+        vec_castling[i] = np.full((8, 8), castling[i])
+
+    result = np.append(result,vec_castling, axis=0)
+
+    vec_nb_moves = np.full((1,8, 8), nb_moves)
+    result = np.append(result,vec_nb_moves, axis=0)
+
+    return result
+
+#return castling = [haut-gauche,haut-droite,bas-gauche,bas-droite]
+def get_castling_state(state_vec,board):
+    castling = np.zeros(4)
+    board_8_8 = np.array(state_vec).reshape((8,8))
+    
+    if((sum(board_8_8[0][1:4])==0) and board.has_queenside_castling_rights(True)):
+        castling[0] = 1 
+
+    if((sum(board_8_8[0][5:7])==0) and board.has_kingside_castling_rights(True)):
+        castling[1] = 1  
+
+    if((sum(board_8_8[7][1:4])==0) and board.has_queenside_castling_rights(False)):
+        castling[2] = 1  
+
+    if((sum(board_8_8[7][5:7])==0) and board.has_kingside_castling_rights(False)):
+        castling[3] = 1  
+   
+    return castling
+
