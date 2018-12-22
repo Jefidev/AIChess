@@ -2,14 +2,16 @@ import chess
 import numpy as np
 
 from base.game import Game
-from games.chess_util import convertBoardState, convertMove
+from games.chess_util import convertBoardState, convertMove, convertBoardStateToInputModel, get_castling_state
 
 
 class ChessGame(Game):
 
-    def __init__(self):
+    def __init__(self,player):
         self.board = chess.Board()
         self.state_vec = convertBoardState(self.board)
+        self.player = player #True : jeu normal, false : jeu inversé
+
 
         super(ChessGame, self).__init__(64*64)
 
@@ -17,9 +19,11 @@ class ChessGame(Game):
         self.board = chess.Board()
         self.state_vec = convertBoardState(self.board)
 
-    def set_board(self,board_val):
+    def set_board(self,board_val,player):
         self.board = chess.Board(board_val)
         self.state_vec = convertBoardState(self.board)
+        self.player = player #True : jeu normal, false : jeu inversé
+
 
 
     def get_current_state(self):
