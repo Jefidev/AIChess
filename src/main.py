@@ -3,6 +3,7 @@ import numpy as np
 from games.chess_game import ChessGame
 from games.chess_util import convertCaseNameToId
 
+print("main")
 
 start_move = np.zeros((8, 8))
 end_move = np.zeros((8, 8))
@@ -12,7 +13,7 @@ end_move[2, 1] = 1
 
 move = (start_move, end_move)
 
-chess_game = ChessGame()
+chess_game = ChessGame(True)
 
 print(chess_game.board)
 print(start_move)
@@ -27,7 +28,4 @@ print(chess_game.set_board("r3kbnr/pppppppp/8/8/8/P7/1PPPPPPP/RNBQKBNR b KQkq - 
 
 print(chess_game.board)
 
-
-
-
-print([str(m) for m in chess_game.board.legal_moves])
+print(chessGame.get_state_input_model())
