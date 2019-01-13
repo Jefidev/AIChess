@@ -25,3 +25,9 @@ print(chess_game.set_board("r3kbnr/pppppppp/8/8/8/P7/1PPPPPPP/RNBQKBNR b KQkq - 
 print(chess_game.board)
 
 print(chess_game.get_state_input_model())
+
+chess_game.get_valid_actions()
+
+a = [[1, 1], [1, 1]]
+b = [[1, 1], [0, 1]]
+print(np.multiply(a,b))

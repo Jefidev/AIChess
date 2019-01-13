@@ -2,7 +2,7 @@ import chess
 import numpy as np
 
 from base.game import Game
-from games.chess_util import convertBoardState, convertMove, convertBoardStateToInputModel, get_castling_state
+from games.chess_util import convertBoardState, convertMove, convertBoardStateToInputModel, get_castling_state, convertCaseNameToId
 
 
 class ChessGame(Game):
@@ -83,5 +83,17 @@ class ChessGame(Game):
             castling_mirror = np.flip(castling)
 
             return convertBoardStateToInputModel(vec_board_mirror,player_int,castling_mirror,self.board.fullmove_number)
-    
+
+    def get_action_space_size(self):
+        return 64 * 64
+
+    def get_valid_actions(self):        
+        legal_moves_index = [[convertCaseNameToId(str(m)[0:2]),convertCaseNameToId(str(m)[2:])] for m in self.board.legal_moves]
+
+        valid_actions = np.zeros((64,64))
+
+        for index in legal_moves_index:
+            valid_actions[index[0]][index[1]] = 1
+
+        return valid_actions
 
