@@ -6,4 +6,6 @@ class EvaluationModel(object):
     '''
 
     def predict(self, state):
+        # Renvoie une vecteur de proba pour chaque mouvements
+        # Ainsi qu'une valeur de l'état actuel
         NotImplemented
