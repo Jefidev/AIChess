@@ -32,7 +32,7 @@ class ChessGame(Game):
         NotImplemented
 
     def perform_move(self, move):
-        conv_move = self._convert_vec_to_move(move[0], move[1])
+        conv_move = self._convert_vec_to_move(move)
 
         conv_move = chess.Move.from_uci(conv_move)
         self.board.push(conv_move)
@@ -41,14 +41,14 @@ class ChessGame(Game):
         self.next_player = not self.next_player
 
     def is_move_valid(self, move):
-        conv_move = self._convert_vec_to_move(move[0], move[1])
+        conv_move = self._convert_vec_to_move(move)
         return (conv_move in [str(m) for m in self.board.legal_moves])
 
     def turn(self):
         return self.board.turn
 
-    def _convert_vec_to_move(self, start_position, end_position):
-        conv_move = convertMove(start_position, end_position)
+    def _convert_vec_to_move(self, move):
+        conv_move = convertMove(move)
         return conv_move
 
     #Renvoie le plateau en fonction du prochain joueur qui doir jouer

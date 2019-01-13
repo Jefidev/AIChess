@@ -29,8 +29,11 @@ def convertCaseNameToId(name):
     axeY = int(name[1]) - 1
     return axeX + axeY*8
 
-
-def convertMove(before, after):
+#move = mat (64*64)
+def convertMove(move):
+    before = np.array([max(vec) for vec in move])
+    index = np.argmax(before)
+    after = move[index]
     return caseVecToName(before) + caseVecToName(after)
 
 
